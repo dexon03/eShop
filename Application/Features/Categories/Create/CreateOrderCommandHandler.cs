@@ -1,6 +1,5 @@
 ﻿using Application.Data;
 using MediatR;
-using Domain.Entities;
 
 namespace Application.Features.Categories.Create;
 
@@ -14,13 +13,14 @@ public sealed class CreateOrderCommandHandler : IRequestHandler<CreateCategoryCo
     }
     public async Task Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var category = await _context.Categories.FindAsync(request.category);
+        var category = await _context.Categories.FindAsync(request.category.Id);
         if (category is not null)
         {
-            throw new Exception("Category already exists");
+            throw new InvalidOperationException("Category already exists");
         }
 
         _context.Categories.Add(request.category);
         await _context.SaveChangesAsync(cancellationToken);
+        
     }
 }

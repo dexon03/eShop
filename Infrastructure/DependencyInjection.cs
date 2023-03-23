@@ -13,7 +13,7 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var assembly = typeof(DependencyInjection).Assembly;
-        services.AddDbContext<DbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("Database")));
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
         return services;
     }

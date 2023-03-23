@@ -19,9 +19,10 @@ public class EditCategoryCommandHandler : IRequestHandler<EditCategoryCommand>
         var category = await _context.Categories.FindAsync(request.Category.Id);
         if (category is null)
         {
-            throw new Exception("Category not found");
+            throw new KeyNotFoundException("Category not found");
         }
         _mapper.Map(request.Category, category);
+        await _context.SaveChangesAsync(cancellationToken);
         
     }
 }
