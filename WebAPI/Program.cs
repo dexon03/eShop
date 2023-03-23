@@ -1,6 +1,5 @@
 using Application;
 using Infrastructure;
-using Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,18 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("front" ,policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
+});
+
 builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
-
-
-
 var app = builder.Build();
-
-var serviceScope = app.Services.CreateScope();
-var dataContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-dataContext?.Database.EnsureCreated();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -29,9 +26,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("front");
 
 app.MapControllers();
 
