@@ -68,12 +68,11 @@ function ResponsiveAppBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Menu open={false} 
-            >
-              <MenuItem component={NavLink} to="/products">
+            <Menu open={false} >
+              <MenuItem >
                 <Typography textAlign="center">Products</Typography>
               </MenuItem>
-              <MenuItem component={NavLink} to="/category" >
+              <MenuItem component={Link} to="/category" >
                 <Typography textAlign="center" >Category</Typography>
               </MenuItem>
               <MenuItem>

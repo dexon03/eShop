@@ -11,15 +11,15 @@ export const routes: RouteObject[] = [
         element: <App />,
         children: [
             {
-                path: 'category',
+                path: '/category',
                 element: <CategoryList />,
             },
             {
-                path: 'contact',
+                path: '/contact',
                 element: <Contact />,
             },
             {
-                path: 'about',
+                path: '/about',
                 element: <About />,
             }
         ]
