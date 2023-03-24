@@ -1,18 +1,27 @@
 import './App.css';
 import NavBar from './Components/NavBar';
 import { Outlet } from 'react-router-dom';
-import Contact from './Components/Contact/Contact';
+import Container from '@mui/material/Container';
+import { useEffect, useState } from 'react';
+import agent from './app/api/agent';
+import { Category } from './app/models/Category';
+import CategoryList from './Components/Category/CategoryList';
+import CreateCategory from './Components/Category/CreateCategory';
 
 function App() {
+  
   
 
 
   return (
-    <div className="App">
-      <NavBar />
-      <Outlet />
-    </div>
-
+      <>
+        <NavBar />
+        <Container style={{marginTop: '7em'}}>
+          {/* <CreateCategory /> */}
+          {/* <CategoryList /> */}
+          <Outlet />
+        </Container>
+      </>
   );
 }
 
