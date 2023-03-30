@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Features.Categories.Get;
 
-public record GetCategoryRequest(Guid Id) : IRequest<Category>;
+public record GetCategoryQuery(Guid Id) : IRequest<Category>;

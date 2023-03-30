@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Categories.Get;
 
-public class GetCategoryRequestHandler : IRequestHandler<GetCategoryRequest, Category>
+public class GetCategoryRequestHandler : IRequestHandler<GetCategoryQuery, Category>
 {
     private readonly IApplicationDbContext _context;
 
@@ -13,7 +13,7 @@ public class GetCategoryRequestHandler : IRequestHandler<GetCategoryRequest, Cat
     {
         _context = context;
     }
-    public async Task<Category> Handle(GetCategoryRequest request, CancellationToken cancellationToken)
+    public async Task<Category> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken: cancellationToken);
         if (category is null)

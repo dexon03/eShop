@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Categories.GetAll;
 
-public class GetAllCategoryRequestHandler : IRequestHandler<GetAllCategoryRequest, List<Category>>
+public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQuery, List<Category>>
 {
     private readonly IApplicationDbContext _context;
 
-    public GetAllCategoryRequestHandler(IApplicationDbContext context)
+    public GetAllCategoryQueryHandler(IApplicationDbContext context)
     {
         _context = context;
     }
-    public async Task<List<Category>> Handle(GetAllCategoryRequest request, CancellationToken cancellationToken)
+    public async Task<List<Category>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
     {
         
         return await _context.Categories.ToListAsync(cancellationToken: cancellationToken);

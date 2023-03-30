@@ -1,11 +1,7 @@
 import {List, ListItem, ListItemText} from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import agent from "../../app/api/agent";
 import { Category } from "../../app/models/Category";
-
-
-
 
 export default function CategoryList(){
     
@@ -17,6 +13,7 @@ export default function CategoryList(){
             setCategories(response);
         })
     },[]);
+    
     return (
         <List>
             {categories.map((category : Category) => (

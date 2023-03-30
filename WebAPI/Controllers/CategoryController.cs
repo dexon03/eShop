@@ -23,7 +23,7 @@ public class CategoryController : Controller
     [HttpGet]
     public async Task<ActionResult<List<Category>>> GetAllCategories()
     {
-        return Ok(await _mediator.Send(new GetAllCategoryRequest()));
+        return Ok(await _mediator.Send(new GetAllCategoryQuery()));
     }
 
     [HttpGet("{id}")]
@@ -31,7 +31,7 @@ public class CategoryController : Controller
     {
         try
         {
-            var category = await _mediator.Send(new GetCategoryRequest(id));
+            var category = await _mediator.Send(new GetCategoryQuery(id));
             return Ok(category);
         }
         catch (KeyNotFoundException e)
