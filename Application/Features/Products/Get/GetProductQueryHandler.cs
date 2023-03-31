@@ -17,7 +17,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, Product>
         var product = await _context.Products.FindAsync(request.Id);
         if (product is null)
         {
-            throw new KeyNotFoundException(nameof(Product));
+            throw new KeyNotFoundException("Product not found");
         }
         return product;
     }

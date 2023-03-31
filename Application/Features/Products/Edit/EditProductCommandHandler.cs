@@ -22,7 +22,7 @@ public class EditProductCommandHandler
 
         if (product is null)
         {
-            throw new KeyNotFoundException(nameof(Product));
+            throw new KeyNotFoundException("Product not found");
         }
         _mapper.Map(request.Product, product);
         await _context.SaveChangesAsync(cancellationToken);
