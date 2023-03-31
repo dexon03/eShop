@@ -1,15 +1,18 @@
 import { FormControl, InputLabel, Input, Button } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import React, {ChangeEvent, Dispatch, SetStateAction, useEffect, useState} from "react";
 import { Category } from "../../app/models/Category";
 import { v4 as uuidv4 } from 'uuid';
 import agent from "../../app/api/agent";
 
-export default function CreateCategory(){
 
-    const category : Category = {
-        id: "",
-        name: ""
-    }
+interface Props {
+    isEdit : boolean,
+    category : Category,
+    setCategory : Dispatch<SetStateAction<Category>>
+    setEdit : Dispatch<SetStateAction<boolean>>
+}
+export default function CreateOrEditCategory({isEdit,category, setCategory, setEdit} : Props){
+    
     const [name, setName] = useState<string>('');
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,11 +21,19 @@ export default function CreateCategory(){
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        category.id = uuidv4();
+        category.id = category.id === '' ? uuidv4() : category.id;
         category.name = name;
-        agent.Categories.create(category);
+        
+        isEdit ? agent.Categories.update(category) : agent.Categories.create(category);
+        
+        setCategory({id: '', name : ''} as Category);
+        setEdit(false);
     };
 
+    useEffect(() => {
+        setName(category.name)
+    },[category]);
+    
     return (
         <FormControl component="form" onSubmit={handleSubmit}>
         <InputLabel htmlFor="category-name">Category name</InputLabel>
@@ -39,7 +50,7 @@ export default function CreateCategory(){
             color="primary"
             style={{ marginTop: '1em' }}
         >
-            Create Category
+            { isEdit ? 'Edit category' : "Create Category"}
         </Button>
         </FormControl>
     );
