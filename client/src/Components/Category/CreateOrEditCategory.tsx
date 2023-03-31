@@ -9,9 +9,10 @@ interface Props {
     isEdit : boolean,
     category : Category,
     setCategory : Dispatch<SetStateAction<Category>>
-    setEdit : Dispatch<SetStateAction<boolean>>
+    setEdit : Dispatch<SetStateAction<boolean>>,
+    onEditOrCreate : (category: Category) => void
 }
-export default function CreateOrEditCategory({isEdit,category, setCategory, setEdit} : Props){
+export default function CreateOrEditCategory({isEdit,category, setCategory, setEdit, onEditOrCreate} : Props){
     
     const [name, setName] = useState<string>('');
 
@@ -25,9 +26,8 @@ export default function CreateOrEditCategory({isEdit,category, setCategory, setE
         category.name = name;
         
         isEdit ? agent.Categories.update(category) : agent.Categories.create(category);
+        onEditOrCreate(category);
         
-        setCategory({id: '', name : ''} as Category);
-        setEdit(false);
     };
 
     useEffect(() => {

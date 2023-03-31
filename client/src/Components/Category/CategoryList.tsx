@@ -36,9 +36,17 @@ export default function CategoryList(){
             );});
         
     }
-    const handleEdit = (category: Category) => {
+    
+    const onEdit = (category: Category) =>{
         setCategory(category);
         setEdit(true);
+    }
+    const handleCreateOrEdit = (category: Category) => {
+        isEdit 
+            ? setCategories([...categories.filter(c => c.id !== category.id), category]) 
+            : setCategories([...categories, category]);
+        setCategory({id: '', name : ''} as Category);
+        setEdit(false);
     }
     
     return (
@@ -66,7 +74,7 @@ export default function CategoryList(){
                                         {category.name}
                                     </TableCell>
                                     <TableCell align='center' >
-                                        <Button variant="contained" color="primary" sx ={{marginRight: 2}} onClick = {() => handleEdit(category)}>Edit</Button>
+                                        <Button variant="contained" color="primary" sx ={{marginRight: 2}} onClick = {() => onEdit(category)}>Edit</Button>
                                         <Button variant="contained" color='error' onClick={() => handleDelete(category.id)}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
@@ -76,7 +84,7 @@ export default function CategoryList(){
                 </TableContainer>
             </Grid>
             <Grid item>
-                <CreateOrEditCategory isEdit = {isEdit} category={category} setCategory = {setCategory} setEdit ={setEdit}  />
+                <CreateOrEditCategory isEdit = {isEdit} category={category} setCategory = {setCategory} setEdit ={setEdit}  onEditOrCreate={handleCreateOrEdit}/>
             </Grid>
         </Grid>
     )
