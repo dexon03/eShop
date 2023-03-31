@@ -15,6 +15,9 @@ public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, Lis
     }
     public async Task<List<Product>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Products.ToListAsync(cancellationToken);
+        return await _context.Products
+            .Include(nameof(Category))
+            .Include(nameof(Vendor))
+            .ToListAsync(cancellationToken);
     }
 }
