@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Application.Features.Categories.Create;
 
-public sealed class CreateOrderCommandHandler : IRequestHandler<CreateCategoryCommand>
+public sealed class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateOrderCommandHandler(IApplicationDbContext context)
+    public CreateCategoryCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }

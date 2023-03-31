@@ -15,7 +15,7 @@ public class GetCategoryRequestHandler : IRequestHandler<GetCategoryQuery, Categ
     }
     public async Task<Category> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken: cancellationToken);
+        var category = await _context.Categories.FindAsync(request.Id, cancellationToken);
         if (category is null)
         {
             throw new KeyNotFoundException();
