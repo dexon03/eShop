@@ -16,8 +16,7 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, Product>
     public async Task<Product> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
         var product = await _context.Products
-            .Include(p => p.Category)
-            .Include(p => p.Vendor)
+            .Include(nameof(Category))
             .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
         if (product is null)
         {

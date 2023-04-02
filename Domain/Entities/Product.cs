@@ -9,10 +9,8 @@ public class Product
     public string Description { get; set; }
     public string ShortDescription { get; set; }
     public Guid CategoryId { get; set; }
-    public Guid VendorId { get; set; }
     public string ImageUrl { get; set; }
 
     // Reference navigation properties
     public Category Category { get; set; }
-    public Vendor Vendor { get; set; }
 }

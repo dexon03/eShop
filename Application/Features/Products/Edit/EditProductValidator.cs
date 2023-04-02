@@ -1,11 +1,10 @@
-﻿using Domain.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Application.Features.Products.Create;
+namespace Application.Features.Products.Edit;
 
-public sealed class CreateProductValidator : AbstractValidator<CreateProductCommand>
+public class EditProductValidator : AbstractValidator<EditProductCommand>
 {
-    public CreateProductValidator()
+    public EditProductValidator()
     {
         RuleFor(x => x.Product.Name).NotEmpty().MinimumLength(2);
         RuleFor(x => x.Product.Price).NotEmpty().GreaterThan(0);

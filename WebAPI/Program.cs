@@ -1,5 +1,8 @@
 using Application;
+using Application.Common.Behaviors;
+using FluentValidation;
 using Infrastructure;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddCors(opt =>
 builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
+
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+builder.Services.AddValidatorsFromAssembly(Application.DependencyInjection.Assembly, includeInternalTypes: true);
 
 var app = builder.Build();
 

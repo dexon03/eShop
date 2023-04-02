@@ -80,7 +80,7 @@ public class ProductController : Controller
         catch (ValidationException e)
         {
             Console.WriteLine(e.Message);
-            return ValidationProblem();
+            return ValidationProblem(e.Message);
         }
     }
     

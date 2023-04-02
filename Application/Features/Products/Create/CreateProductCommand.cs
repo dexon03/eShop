@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Features.Products.Create;
 
-public record CreateProductCommand(Product Product) : IRequest;
+public record CreateProductCommand(Product Product) : IRequest<Unit>;

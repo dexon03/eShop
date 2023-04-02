@@ -16,9 +16,9 @@ public class EditProductCommandHandler
         _mapper = mapper;
     }
 
-    public async Task Handle(EditProductCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(EditProductCommand request, CancellationToken cancellationToken)
     {
-        var product = await _context.Products.FindAsync(request.Product.Id,cancellationToken);
+        var product = await _context.Products.FindAsync(request.Product.Id);
 
         if (product is null)
         {
@@ -26,5 +26,6 @@ public class EditProductCommandHandler
         }
         _mapper.Map(request.Product, product);
         await _context.SaveChangesAsync(cancellationToken);
+        return Unit.Value;
     }
 }

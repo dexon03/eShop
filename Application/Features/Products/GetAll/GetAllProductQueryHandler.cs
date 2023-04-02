@@ -17,7 +17,6 @@ public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, Lis
     {
         return await _context.Products
             .Include(nameof(Category))
-            .Include(nameof(Vendor))
             .ToListAsync(cancellationToken);
     }
 }
