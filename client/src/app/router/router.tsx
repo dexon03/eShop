@@ -3,7 +3,9 @@ import App from "../../App";
 import About from "../../Components/About/About";
 import CategoryList from "../../Components/Category/CategoryList";
 import Contact from "../../Components/Contact/Contact";
-import Product from "../../Components/Product/Product";
+import ProductList from "../../Components/Product/ProductList";
+import React from "react";
+import CreateProduct from "../../Components/Product/CreateProduct";
 
 
 export const routes: RouteObject[] = [
@@ -12,20 +14,24 @@ export const routes: RouteObject[] = [
         element: <App />,
         children: [
             {
-                path: '/product',
-                element: <Product />,
+                path: 'product',
+                element: <ProductList />,
             },
             {
-                path: '/category',
+                path: 'category',
                 element: <CategoryList/>,
             },
             {
-                path: '/contact',
+                path: 'contact',
                 element: <Contact />,
             },
             {
-                path: '/about',
+                path: 'about',
                 element: <About />,
+            },
+            {
+                path: 'product/create',
+                element: <CreateProduct />,
             }
         ]
     }    
