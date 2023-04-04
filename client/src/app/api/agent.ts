@@ -1,4 +1,5 @@
 import { Category } from '../models/Category';
+import { Product } from '../models/Product';
 import axios, { AxiosResponse } from 'axios';
 
 axios.defaults.baseURL = 'https://localhost:44300/api/v1';
@@ -20,8 +21,18 @@ const Categories = {
     delete: (id: string)  => requests.delete(`/Category/${id}`)
 }
 
+const Products = {
+    get : (id: string) : Promise<Product> => requests.get<Product>(`/Product/${id}`),
+    list: () : Promise<Product[]> => requests.get<Product[]>('/Product'),
+    create: (product: Product) => requests.post('/Product', product),
+    update: (product: Product) => requests.put(`/Product/${product.id}`, product),
+    delete: (id: string)  => requests.delete(`/Product/${id}`)
+}
+
+
 const agent = {
-    Categories
+    Categories,
+    Products
 }
 
 export default agent;
