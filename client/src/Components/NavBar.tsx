@@ -16,7 +16,6 @@ import { NavLink } from 'react-router-dom';
 import { Link } from '@mui/material';
 
 
-const pages = ['Products', 'Category', 'Contact', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
