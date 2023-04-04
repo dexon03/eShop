@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.Products.Edit;
 
-public class EditProductCommandHandler
+public class EditProductCommandHandler : IRequestHandler<EditProductCommand,Unit>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
