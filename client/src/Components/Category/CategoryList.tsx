@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Category} from "../../app/models/Category";
-import {Button, Grid} from "@mui/material";
+import {Button, Container, Grid} from "@mui/material";
 import CreateOrEditCategory from "./CreateOrEditCategory";
 
 
@@ -50,7 +50,8 @@ export default function CategoryList(){
     }
     
     return (
-        <Grid 
+        <Container sx={{marginBottom: 15 }}>
+        <Grid
             container
             direction="row"
             justifyContent="center"
@@ -87,5 +88,6 @@ export default function CategoryList(){
                 <CreateOrEditCategory isEdit = {isEdit} category={category} setCategory = {setCategory} setEdit ={setEdit}  onEditOrCreate={handleCreateOrEdit}/>
             </Grid>
         </Grid>
+    </Container>
     )
 }
