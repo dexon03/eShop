@@ -6,6 +6,7 @@ import Contact from "../../Components/Contact/Contact";
 import ProductList from "../../Components/Product/ProductList";
 import React from "react";
 import CreateProduct from "../../Components/Product/CreateProduct";
+import EditProduct from "../../Components/Product/EditProduct";
 
 
 export const routes: RouteObject[] = [
@@ -32,6 +33,10 @@ export const routes: RouteObject[] = [
             {
                 path: 'product/create',
                 element: <CreateProduct />,
+            },
+            {
+                path: 'product/:id',
+                element: <EditProduct />
             }
         ]
     }    

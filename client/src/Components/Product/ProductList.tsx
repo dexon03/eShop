@@ -34,7 +34,6 @@ export default function ProductList(){
     
     return (
         <Container sx={{marginBottom: 15 }}>
-            
             <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom={3}>
                 <Button variant="contained" color="primary" sx={{marginRight: 2}} component={Link} to='create'>Create new product</Button>
                 <Typography variant="body1" 
@@ -86,7 +85,7 @@ export default function ProductList(){
                                             {product.category.name}
                                         </TableCell>
                                         <TableCell component="th" align='center' scope="row">
-                                            <Button variant="contained" color="primary" sx ={{marginRight: 2}} >Edit</Button>
+                                            <Button variant="contained" color="primary" sx ={{marginRight: 2}} component={NavLink} to={`${product.id}`}>Edit</Button>
                                             <Button variant="contained" color='error' onClick={() => onDelete(product.id)}>Delete</Button>
                                         </TableCell>
                                     </TableRow>

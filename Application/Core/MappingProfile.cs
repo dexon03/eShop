@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Core.AfterMap;
+using AutoMapper;
 using Domain.Entities;
 
 namespace Application.Core;
@@ -9,6 +10,6 @@ public class MappingProfile : Profile
     {
         CreateMap<Category, Category>();
         CreateMap<Vendor, Vendor>();
-        CreateMap<Product, Product>();
+        CreateMap<Product, Product>().AfterMap<EditProductRequest>();
     }
 }

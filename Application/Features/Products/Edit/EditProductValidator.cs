@@ -12,6 +12,5 @@ public class EditProductValidator : AbstractValidator<EditProductCommand>
         RuleFor(x => x.Product.Description).NotEmpty().MinimumLength(10);
         RuleFor(x => x.Product.ShortDescription).NotEmpty().MinimumLength(5);
         RuleFor(x => x.Product.CategoryId).NotEmpty();
-        RuleFor(x => x.Product.ImageUrl).NotEmpty();
     }
 }

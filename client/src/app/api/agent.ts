@@ -2,7 +2,7 @@ import { Category } from '../models/Category';
 import { Product } from '../models/Product';
 import axios, { AxiosResponse } from 'axios';
 
-axios.defaults.baseURL = 'https://localhost:44300/api/v1';
+axios.defaults.baseURL = 'https://localhost:7264/api/v1';
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
