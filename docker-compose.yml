@@ -7,10 +7,8 @@ services:
     image: postgres
     ports:
       - "5434:5432"
-    environment:
-      - POSTGRES_PASSWORD=1111
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=eShop
+    env_file:
+      - ENVFiles/postgres.env
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:
@@ -23,9 +21,8 @@ services:
     build:
       context: .
       dockerfile: WebAPI/Dockerfile
-    environment:
-        ASPNETCORE_URLS: http://+:5223
-        Database: "User ID=postgres;Password=1111;Server=postgres;Port=5432;Database=eShop"
+    env_file:
+      - ENVFiles/WebAPI.env
     ports:
       - "5223:5223"
     networks:
