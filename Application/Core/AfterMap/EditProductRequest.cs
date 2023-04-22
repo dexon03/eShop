@@ -5,7 +5,7 @@ using Domain.Entities;
 
 namespace Application.Core.AfterMap;
 
-public class EditProductRequest : IMappingAction<Product, Product>
+internal class EditProductRequest : IMappingAction<Product, Product>
 {
     private readonly IApplicationDbContext _context;
 

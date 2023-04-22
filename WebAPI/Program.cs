@@ -23,6 +23,9 @@ builder.Services
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
 builder.Services.AddValidatorsFromAssembly(Application.DependencyInjection.Assembly, includeInternalTypes: true);
 
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,10 +38,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors("front");
 
 app.MapControllers();
+
+
 
 app.Run();

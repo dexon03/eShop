@@ -12,8 +12,9 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var connectionString = Environment.GetEnvironmentVariable("Database");
         var assembly = typeof(DependencyInjection).Assembly;
-        services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("Database")));
+        services.AddDbContext<ApplicationDbContext>(opt => opt.UseNpgsql(connectionString));
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
         return services;
     }

@@ -1,8 +1,46 @@
-﻿services:
+﻿networks:
+  eShop:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=1111
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=eShop
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+        - eShop
+ 
   webapi:
     image: webapi
+    depends_on:
+      - postgres
     build:
       context: .
       dockerfile: WebAPI/Dockerfile
+    environment:
+        ASPNETCORE_URLS: http://+:5223
+        Database: "User ID=postgres;Password=1111;Server=postgres;Port=5432;Database=eShop"
     ports:
-      - "5223:80"
+      - "5223:5223"
+    networks:
+      - eShop
+  
+    
+  client:
+    image: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+        - webapi
+ 
+volumes:
+    postgres:
