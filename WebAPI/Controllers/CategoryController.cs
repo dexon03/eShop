@@ -5,6 +5,7 @@ using Application.Features.Categories.GetAll;
 using Application.Features.Categories.Get;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -20,6 +21,7 @@ public class CategoryController : Controller
         _mediator = mediator;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<List<Category>>> GetAllCategories()
     {

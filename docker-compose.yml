@@ -29,15 +29,15 @@ services:
       - eShop
   
     
-  client:
-    image: client
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-        - webapi
- 
+#  client:
+#    image: client
+#    build:
+#      context: ./client
+#      dockerfile: Dockerfile
+#    ports:
+#      - "3000:3000"
+#    depends_on:
+#        - webapi
+# 
 volumes:
     postgres:

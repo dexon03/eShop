@@ -6,6 +6,7 @@ using Application.Features.Products.GetAll;
 using Domain.Entities;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -21,13 +22,14 @@ public class ProductController : Controller
         _mediator = mediator;
     }
     
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetAllProductQuery());
         return Ok(result);
     }
-    
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
