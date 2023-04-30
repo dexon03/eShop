@@ -47,7 +47,7 @@ public class CategoryController : Controller
     public async Task<IActionResult> DeleteCategory(Guid id)
     {
         await _mediator.Send(new DeleteCategoryCommand(id));
-        return Ok();return NotFound();
+        return Ok();
     }
 
     [HttpPut("{id:Guid}")]
