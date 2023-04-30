@@ -13,6 +13,7 @@ public static class DependencyInjection
         {
             configuration.RegisterServicesFromAssembly(Assembly);
         });
+        services.AddHttpContextAccessor();
         
         return services;
     }

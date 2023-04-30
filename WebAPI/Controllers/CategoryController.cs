@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class CategoryController : Controller
@@ -21,14 +22,14 @@ public class CategoryController : Controller
         _mediator = mediator;
     }
 
-    [Authorize]
+    
     [HttpGet]
     public async Task<ActionResult<List<Category>>> GetAllCategories()
     {
         return Ok(await _mediator.Send(new GetAllCategoryQuery()));
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:Guid}")]
     public async Task<ActionResult<Category>> GetCategory(Guid id)
     {
         try
@@ -58,7 +59,7 @@ public class CategoryController : Controller
         }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> DeleteCategory(Guid id)
     {
         try
@@ -73,7 +74,7 @@ public class CategoryController : Controller
         }
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:Guid}")]
     public async Task<IActionResult> EditCategory(Guid id,Category category)
     {
         category.Id = id;

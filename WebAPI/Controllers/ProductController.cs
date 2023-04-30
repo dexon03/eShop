@@ -45,6 +45,7 @@ public class ProductController : Controller
         }
     }
     
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create(Product product)
     {
@@ -65,6 +66,7 @@ public class ProductController : Controller
         }
     }
     
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, Product product)
     {
@@ -86,6 +88,7 @@ public class ProductController : Controller
         }
     }
     
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {

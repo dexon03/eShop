@@ -1,4 +1,5 @@
-﻿using Application.Features.Auth.Login;
+﻿using Application.Features.Auth.GetUser;
+using Application.Features.Auth.Login;
 using Application.Features.Auth.Register;
 using Domain.DTOs;
 using Domain.Identity;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
 
-[AllowAnonymous]
+
 [ApiController]
 [Route("api/v1/[controller]")]
 public class AccountController : ControllerBase
@@ -20,6 +21,7 @@ public class AccountController : ControllerBase
         _mediator = mediator;
     }
 
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
@@ -28,11 +30,19 @@ public class AccountController : ControllerBase
         return Ok(user);
     }
 
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         var user = await _mediator.Send(new RegisterRequest(registerDto));
 
         return Ok(user);
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult<UserDto>> GetUser()
+    {
+        return Ok( await _mediator.Send(new GetUserRequest()));
     }
 }
