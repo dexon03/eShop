@@ -18,7 +18,7 @@ public class GetCategoryRequestHandler : IRequestHandler<GetCategoryQuery, Categ
         var category = await _context.Categories.FindAsync(request.Id, cancellationToken);
         if (category is null)
         {
-            throw new KeyNotFoundException();
+            throw new KeyNotFoundException("Category not found");
         }
         return category;
     }

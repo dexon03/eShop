@@ -32,62 +32,29 @@ public class CategoryController : Controller
     [HttpGet("{id:Guid}")]
     public async Task<ActionResult<Category>> GetCategory(Guid id)
     {
-        try
-        {
-            var category = await _mediator.Send(new GetCategoryQuery(id));
-            return Ok(category);
-        }
-        catch (KeyNotFoundException e)
-        {
-            Console.WriteLine(e); 
-            return NotFound();
-        }
+        var category = await _mediator.Send(new GetCategoryQuery(id));
+        return Ok(category);
     }
     
     [HttpPost]
     public async Task<IActionResult> CreateCategory(Category category)
     {
-        try
-        {
             await _mediator.Send(new CreateCategoryCommand(category));
             return Ok();
-        }
-        catch (InvalidOperationException e)
-        {
-            Console.WriteLine(e.Message);
-            return BadRequest();
-        }
     }
 
     [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> DeleteCategory(Guid id)
     {
-        try
-        {
-            await _mediator.Send(new DeleteCategoryCommand(id));
-            return Ok();
-        }
-        catch (KeyNotFoundException e)
-        {
-            Console.WriteLine(e.Message);
-            return NotFound();
-        }
+        await _mediator.Send(new DeleteCategoryCommand(id));
+        return Ok();return NotFound();
     }
 
     [HttpPut("{id:Guid}")]
     public async Task<IActionResult> EditCategory(Guid id,Category category)
     {
-        category.Id = id;
-        try
-        {
-            await _mediator.Send(new EditCategoryCommand(category));
-            return Ok();
-        }
-        catch (KeyNotFoundException e)
-        {
-            Console.WriteLine(e.Message);
-            return NotFound();
-        }
+        await _mediator.Send(new EditCategoryCommand(category));
+        return Ok();
     }
 
 }

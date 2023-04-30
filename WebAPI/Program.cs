@@ -50,6 +50,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors("front");
+app.UseExceptionHandler();
 
 app.MapControllers();
 
