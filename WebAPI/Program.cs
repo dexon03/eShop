@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,7 @@ builder.Services.AddValidatorsFromAssembly(Application.DependencyInjection.Assem
 
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,10 +52,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors("front");
-app.UseExceptionHandler();
 
 app.MapControllers();
-
+app.UseMiddleware<ExceptionHandler>();
 
 
 app.Run();

@@ -14,9 +14,16 @@ public class ExceptionHandler
         _next = next;
     }
 
-    public async Task InvokeAsync(HttpContent content)
+    public async Task InvokeAsync(HttpContext context)
     {
-        
+        try
+        {
+            await _next.Invoke(context);
+        }
+        catch (Exception ex)
+        {
+            await HandleExceptionAsync(context, ex);
+        }
     }
     private Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
