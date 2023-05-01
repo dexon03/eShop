@@ -5,10 +5,12 @@ using Application.Features.Categories.GetAll;
 using Application.Features.Categories.Get;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class CategoryController : Controller
@@ -20,71 +22,39 @@ public class CategoryController : Controller
         _mediator = mediator;
     }
 
+    
     [HttpGet]
     public async Task<ActionResult<List<Category>>> GetAllCategories()
     {
         return Ok(await _mediator.Send(new GetAllCategoryQuery()));
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:Guid}")]
     public async Task<ActionResult<Category>> GetCategory(Guid id)
     {
-        try
-        {
-            var category = await _mediator.Send(new GetCategoryQuery(id));
-            return Ok(category);
-        }
-        catch (KeyNotFoundException e)
-        {
-            Console.WriteLine(e); 
-            return NotFound();
-        }
+        var category = await _mediator.Send(new GetCategoryQuery(id));
+        return Ok(category);
     }
     
     [HttpPost]
     public async Task<IActionResult> CreateCategory(Category category)
     {
-        try
-        {
             await _mediator.Send(new CreateCategoryCommand(category));
             return Ok();
-        }
-        catch (InvalidOperationException e)
-        {
-            Console.WriteLine(e.Message);
-            return BadRequest();
-        }
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> DeleteCategory(Guid id)
     {
-        try
-        {
-            await _mediator.Send(new DeleteCategoryCommand(id));
-            return Ok();
-        }
-        catch (KeyNotFoundException e)
-        {
-            Console.WriteLine(e.Message);
-            return NotFound();
-        }
+        await _mediator.Send(new DeleteCategoryCommand(id));
+        return Ok();
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:Guid}")]
     public async Task<IActionResult> EditCategory(Guid id,Category category)
     {
-        category.Id = id;
-        try
-        {
-            await _mediator.Send(new EditCategoryCommand(category));
-            return Ok();
-        }
-        catch (KeyNotFoundException e)
-        {
-            Console.WriteLine(e.Message);
-            return NotFound();
-        }
+        await _mediator.Send(new EditCategoryCommand(category));
+        return Ok();
     }
 
 }

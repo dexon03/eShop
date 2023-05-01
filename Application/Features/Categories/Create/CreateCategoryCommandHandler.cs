@@ -18,7 +18,7 @@ public sealed class CreateCategoryCommandHandler : IRequestHandler<CreateCategor
         {
             throw new InvalidOperationException("Category already exists");
         }
-
+        
         _context.Categories.Add(request.category);
         await _context.SaveChangesAsync(cancellationToken);
         
