@@ -21,7 +21,7 @@ public class RegisterRequestHandler : IRequestHandler<RegisterRequest,UserDto>
     }
     public async Task<UserDto> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
-        if(await _userManager.Users.AnyAsync(x => x.Email == request.RegisterDto.Email))
+        if(await _userManager.Users.AnyAsync(x => x.Email == request.RegisterDto.Email, cancellationToken: cancellationToken))
             throw new BadRequestException("Email already exists");
 
         var user = new AppUser
